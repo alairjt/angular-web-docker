@@ -34,10 +34,11 @@ RUN set -x  \
  && useradd --system --uid 72379 -m --shell /usr/sbin/nologin phantomjs \
  && su phantomjs -s /bin/sh -c "phantomjs --version"
 
+ENV PHANTOMJS_BIN /usr/local/bin
 # Install npm packages
 RUN npm i -g gulp gulp-cli bower && npm cache clean
 
-RUN npm i -g protractor@4.0.4 
+RUN npm i -g protractor@4.0.4
 
 # Install Selenium and Chrome driver
 RUN webdriver-manager update
