@@ -15,7 +15,7 @@ RUN set -x  \
     # Install official PhantomJS release
  && apt-get update \
  && apt-get install -y --no-install-recommends \
-        curl npm nodejs nodejs-legacy openjdk-8-jre git build-essential \
+        curl npm nodejs nodejs-legacy openjdk-8-jre git \
  && mkdir /tmp/phantomjs \
  && curl -L https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 \
         | tar -xj --strip-components=1 -C /tmp/phantomjs \
@@ -34,14 +34,12 @@ RUN set -x  \
  && useradd --system --uid 72379 -m --shell /usr/sbin/nologin phantomjs \
  && su phantomjs -s /bin/sh -c "phantomjs --version"
 
-ENV PHANTOMJS_BIN /usr/local/bin
 # Install npm packages
 RUN npm i -g gulp gulp-cli bower && npm cache clean
 
-RUN npm i -g protractor@4.0.4
+RUN npm i -g protractor@4.0.4 
 
 # Install Selenium and Chrome driver
 RUN webdriver-manager update
 
 WORKDIR /app
-
